@@ -55,7 +55,7 @@ public class OsgiJtaPlatform implements JtaPlatform {
 	public TransactionManager retrieveTransactionManager() {
 		try {
 			final TransactionManager transactionManager = osgiServiceUtil.getServiceImpl(
-					TransactionManager.class );
+			                "org.apache.aries.transaction.AriesTransactionManager" );
 			if (transactionManager == null) {
 				throw new TransactionException("Cannot retrieve the TransactionManager OSGi service!");
 			}
@@ -70,7 +70,7 @@ public class OsgiJtaPlatform implements JtaPlatform {
 	public UserTransaction retrieveUserTransaction() {
 		try {
 			final UserTransaction userTransaction = osgiServiceUtil.getServiceImpl(
-					UserTransaction.class );
+			                "org.apache.aries.transaction.AriesTransactionManager" );
 			if (userTransaction == null) {
 				throw new TransactionException("Cannot retrieve the UserTransaction OSGi service!");
 			}

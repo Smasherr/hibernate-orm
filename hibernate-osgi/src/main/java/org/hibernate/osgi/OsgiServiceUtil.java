@@ -1,6 +1,6 @@
-/* 
+/*
  * Hibernate, Relational Persistence for Idiomatic Java
- * 
+ *
  * JBoss, Home of Professional Open Source
  * Copyright 2013 Red Hat Inc. and/or its affiliates and other contributors
  * as indicated by the @authors tag. All rights reserved.
@@ -32,7 +32,7 @@ import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Utilities for dealing with OSGi environments
- * 
+ *
  * @author Brett Meyer
  */
 public class OsgiServiceUtil implements Stoppable {
@@ -50,7 +50,7 @@ public class OsgiServiceUtil implements Stoppable {
 	/**
 	 * Locate all implementors of the given service contract in the given OSGi buindle context. Utilizes
 	 * {@link ServiceTracker} (best practice, automatically handles a lot of boilerplate and error conditions).
-	 * 
+	 *
 	 * @param contract The service contract for which to locate implementors
 	 * @param context The OSGi bundle context
 	 * @param T[] The Java type of the service to locate
@@ -75,19 +75,19 @@ public class OsgiServiceUtil implements Stoppable {
 	/**
 	 * Locate the single implementor of the given service contract in the given OSGi buindle context. Utilizes
 	 * {@link ServiceTracker#waitForService(long)}
-	 * 
+	 *
 	 * @param contract The service contract for which to locate implementors
 	 * @param context The OSGi bundle context
 	 * @param T[] The Java type of the service to locate
 	 * @return All know implementors
 	 */
-	public <T> T getServiceImpl(Class<T> contract) {
-		final ServiceTracker serviceTracker = getServiceTracker( contract.getName() );
+	public <T> T getServiceImpl(String contractClassName) {
+		final ServiceTracker serviceTracker = getServiceTracker( contractClassName );
 		try {
 			return (T) serviceTracker.waitForService( 1000 );
 		}
 		catch (Exception e) {
-			LOG.unableToDiscoverOsgiService( contract.getName(), e );
+			LOG.unableToDiscoverOsgiService( contractClassName, e );
 			return null;
 		}
 	}
